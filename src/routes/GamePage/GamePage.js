@@ -1,128 +1,84 @@
 import React, { Component } from 'react';
 import QuestionItem from '../../components/QuestionItem/QuestionItem'
+import QuestionsContext from '../../contexts/QuestionsContext'
+import DriviaApiService from '../../services/drivia-api-service'
 
-const categoryOne = [
-    {
-        id: 7,
-        Question: "Who starred in 'Freddy Got Fingered'?",
-        Answer: 'tomgreen',
-        Points: 200,
-        Category: 'Movies'
-    },
-    {
-        id: 8,
-        Question: "Who starred in 'Forrest Gump'?",
-        Answer: 'tomhanks',
-        Points: 400,
-        Category: 'Movies'
-    },
-    {
-        id: 9,
-        Question: "Who starred in 'Bill and Ted's Excellent Adventure?",
-        Answer: 'keanureeves',
-        Points: 800,
-        Category: 'Movies'
-    }
-]
-
-const categoryTwo = [
-    {
-        id: 1,
-        Question: "Who starred in 'Freddy Got Lingered'?",
-        Answer: 'tomgreen',
-        Points: 200,
-        Category: 'Lovies'
-    },
-    {
-        id: 2,
-        Question: "Who starred in 'Forrest Lump'?",
-        Answer: 'tomhanks',
-        Points: 400,
-        Category: 'Lovies'
-    },
-    {
-        id: 3,
-        Question: "Who starred in 'Bill and Led's Excellent Adventure?",
-        Answer: 'keanureeves',
-        Points: 800,
-        Category: 'Lovies'
-    }
-]
-
-const categoryThree = [
-    {
-        id: 4,
-        Question: "Who starred in 'Freddy Got Bingered'?",
-        Answer: 'tomgreen',
-        Points: 200,
-        Category: 'Bovies'
-    },
-    {
-        id: 5,
-        Question: "Who starred in 'Forrest Bump'?",
-        Answer: 'tomhanks',
-        Points: 400,
-        Category: 'Bovies'
-    },
-    {
-        id: 6,
-        Question: "Who starred in 'Bill and Bed's Excellent Adventure?",
-        Answer: 'keanureeves',
-        Points: 800,
-        Category: 'Bovies'
-    }
-]
 
 export default class GamePage extends Component { 
+  static contextType = QuestionsContext
+
+  state = {
+      categories: [],
+      categoryOneQuestions: [],
+      categoryTwoQuestions: [],
+      categoryThreeQuestions: []
+  }
+
+  componentDidMount() {
+    this.context.clearError()
+  }
+
+  renderCategoryOne() {
+    const { categoryOneQuestions = [] } = this.context
+    return categoryOneQuestions.map(question =>
+      <QuestionItem
+        key={question.id}
+        id={question.id}
+        question={question.question}
+        answer={question.answer}
+        points={500}
+      />
+    )
+  }
+
+  renderCategoryTwo() {
+    const { categoryTwoQuestions = [] } = this.context
+    return categoryTwoQuestions.map(question =>
+      <QuestionItem
+        key={question.id}
+        id={question.id}
+        question={question.question}
+        answer={question.answer}
+        points={500}
+      />
+    )
+  }
+
+  renderCategoryThree() {
+    const { categoryThreeQuestions = [] } = this.context
+    return categoryThreeQuestions.map(question =>
+      <QuestionItem
+        key={question.id}
+        id={question.id}
+        question={question.question}
+        answer={question.answer}
+        points={500}
+      />
+    )
+  }
+
   render() {
-    //const { error } = this.state
-    const categoryOneLayout = categoryOne.map(question => {
-        return <div className='question-column-item'>
-            <QuestionItem 
-                key={question.id}
-                id={question.id}
-                question={question.Question}
-                points={question.Points}
-                answer={question.Answer}
-            />
-        </div>
-    })
-    const categoryTwoLayout = categoryTwo.map(question => {
-        return <div className='question-column-item'>
-            <QuestionItem 
-                key={question.id}
-                id={question.id}
-                question={question.Question}
-                points={question.Points}
-                answer={question.Answer}
-            />
-        </div>
-    })
-    const categoryThreeLayout = categoryThree.map(question => {
-        return <div className='question-column-item'>
-            <QuestionItem 
-                key={question.id}
-                id={question.id}
-                question={question.Question}
-                points={question.Points}
-                answer={question.Answer}
-            />
-        </div>
-    })
+    const { categories } = this.context
     return (
       <div>
           <div className='categories'>
               <div className='category-one'>
-                <h3 className='category-header'>{categoryOne[0].Category}</h3>
-                {categoryOneLayout}
+                <h3 className='category-header'>{categories[0]}</h3>
+                <div className='question-column-item'>
+                {this.renderCategoryOne()}
+                </div>
               </div>
               <div className='category-two'>
-              <h3 className='category-header'>{categoryTwo[0].Category}</h3>
-                {categoryTwoLayout}
+              <h3 className='category-header'>{categories[1]}</h3>
+              <div className='question-column-item'>
+                {this.renderCategoryTwo()}
+                </div>
               </div>
               <div className='category-three'>
-              <h3 className='category-header'>{categoryThree[0].Category}</h3>
-                {categoryThreeLayout}
+              <h3 className='category-header'>{categories[2]}</h3>
+              <div className='question-column-item'>
+                {this.renderCategoryThree()}
+                </div>
               </div>
           </div>
       </div>

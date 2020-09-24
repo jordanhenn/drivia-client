@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import LandingPage from '../../routes/LandingPage/LandingPage'
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import GameSetupPage from '../../routes/GameSetupPage/GameSetupPage'
@@ -34,11 +35,11 @@ class App extends Component {
               path={'/'}
               component={LandingPage}
             />
-            <Route
+            <PublicOnlyRoute
               path={'/login'}
               component={LoginPage}
             />
-            <Route
+            <PublicOnlyRoute
               path={'/register'}
               component={RegistrationPage}
             />
