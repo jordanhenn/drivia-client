@@ -1,16 +1,28 @@
 import React, { Component } from 'react'
 
+export const nullQuestion = {
+    id: '',
+    question: '',
+    answer: '',
+    category: '',
+    points: '',
+  }
+
 const QuestionsContext = React.createContext({
   categoryOneQuestions: [],
   categoryTwoQuestions: [],
   categoryThreeQuestions: [],
   categories: [],
-  score: null,
+  currentQuestion: {},
+  score: 0,
   error: null,
   setError: () => {},
   clearError: () => {},
   setCategories: () => {},
   setQuestions: () => {},
+  setCurrentQuestion: () => {},
+  clearCurrentQuestion: () => {},
+  deleteQuestion: () => {},
   setScore: () => {}
 })
 export default QuestionsContext
@@ -21,7 +33,8 @@ export class QuestionsProvider extends Component {
     categoryTwoQuestions: [],
     categoryThreeQuestions: [],
     categories: [],
-    score: null,
+    currentQuestion: nullQuestion,
+    score: 0,
     error: null,
   };
 
@@ -41,13 +54,36 @@ export class QuestionsProvider extends Component {
       this.setState({ categories })
   }
 
-  setScore = score => {
-      this.setScore({ score })
+  setCurrentQuestion = currentQuestion => {
+    this.setState({ currentQuestion })
+}
+
+  setScore = points => {
+      if(points === 0) {
+        this.setState({ score: 0 })
+      }
+      const newScore = this.state.score + points
+      this.setState({ score: newScore })
   }
 
   setError = error => {
     console.error(error)
     this.setState({ error })
+  }
+
+  clearCurrentQuestion = () => {
+    this.setState({ currentQuestion: nullQuestion })
+  }
+
+  deleteQuestion = (id) => {
+    const newCategoryOne = this.state.categoryOneQuestions.filter(question => question.id !== id)
+    const newCategoryTwo = this.state.categoryTwoQuestions.filter(question => question.id !== id)
+    const newCategoryThree = this.state.categoryThreeQuestions.filter(question => question.id !== id)
+    this.setState({ 
+        categoryOneQuestions: newCategoryOne,
+        categoryTwoQuestions: newCategoryTwo,
+        categoryThreeQuestions: newCategoryThree 
+    })
   }
 
   clearError = () => {
@@ -59,6 +95,7 @@ export class QuestionsProvider extends Component {
       categoryOneQuestions: this.state.categoryOneQuestions,
       categoryTwoQuestions: this.state.categoryTwoQuestions,
       categoryThreeQuestions: this.state.categoryThreeQuestions,
+      currentQuestion: this.state.currentQuestion,
       categories: this.state.categories,
       score: this.state.score,
       error: this.state.error,
@@ -68,6 +105,10 @@ export class QuestionsProvider extends Component {
       setCategoryOneQuestions: this.setCategoryOneQuestions,
       setCategoryTwoQuestions: this.setCategoryTwoQuestions,
       setCategoryThreeQuestions: this.setCategoryThreeQuestions,
+      setScore: this.setScore,
+      setCurrentQuestion: this.setCurrentQuestion,
+      deleteQuestion: this.deleteQuestion,
+      clearCurrentQuestion: this.clearCurrentQuestion
     }
     return (
       <QuestionsContext.Provider value={value}>
