@@ -36,7 +36,7 @@ const DriviaApiService = {
           : res.json()
       )
   },
-  postScore(user_id, score) {
+  postScore( score ) {
     return fetch(`${config.API_ENDPOINT}/leaderboard`, {
       method: 'POST',
       headers: {
@@ -44,7 +44,6 @@ const DriviaApiService = {
         'Authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        user_id,
         score
       }),
     })

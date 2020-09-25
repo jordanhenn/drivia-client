@@ -1,54 +1,26 @@
 import React, { Component } from 'react';
+import DriviaApiService from '../../services/drivia-api-service'
 
-const usersAndScores = [
-    {
-        user: 'bobby',
-        score: 2000
-    },
-    {
-        user: 'bobby1',
-        score: 1999
-    },
-    {
-        user: 'bobby2',
-        score: 1998
-    },
-    {
-        user: 'bobby3',
-        score: 1997
-    },
-    {
-        user: 'bobby4',
-        score: 1996
-    },
-    {
-        user: 'bobby5',
-        score: 1995
-    },
-    {
-        user: 'bobby6',
-        score: 1994
-    },
-    {
-        user: 'bobby7',
-        score: 1993
-    },
-    {
-        user: 'bobby8',
-        score: 1992
-    },
-    {
-        user: 'bobby9',
-        score: 1991
-    },
-]
 
 export default class Leaderboard extends Component { 
+
+  state = {
+    leaders: []
+  }
+
+  componentDidMount() {
+    DriviaApiService.getScores()
+      .then(result => {
+        console.log(result)
+        this.setState({ leaders: result })
+      })
+  }
+
   render() {
-    //const { error } = this.state
-    const leaderTableItems = usersAndScores.map(user => {
+    const { leaders } = this.state
+    const leaderTableItems = leaders.map(user => {
         return <tr>
-            <td>{user.user}</td>
+            <td>{user['user:user_name']}</td>
             <td>{user.score}</td>
         </tr>
     })
