@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionsContext from '../../contexts/QuestionsContext'
-import { withRouter } from 'react-router-dom';
+import Nav from '../../components/Nav/Nav'
+import { withRouter, Link } from 'react-router-dom';
 import DriviaApiService from '../../services/drivia-api-service'
 
 class GameSetupPage extends Component { 
@@ -9,7 +10,8 @@ class GameSetupPage extends Component {
   state = {
     categoryOne: "movies",
     categoryTwo: "movies",
-    categoryThree: "movies"
+    categoryThree: "movies",
+    categoriesSet: "false"
   }
 
   handleCategorySubmit = (e) => {
@@ -32,8 +34,12 @@ class GameSetupPage extends Component {
     DriviaApiService.getQuestions(categories[2])
     .then(this.context.setCategoryThreeQuestions)
     .catch(this.context.setError)
-   
-    this.props.history.push('/game')   
+
+    this.context.clearScore()
+    
+    this.setState({
+      categoriesSet: true
+    })
   }
 
   handleCategoryOneChange = (e) => {
@@ -47,9 +53,23 @@ class GameSetupPage extends Component {
   handleCategoryThreeChange = (e) => {
     this.setState({ categoryThree: e.target.value });
   }
+  
+  renderStartGame() {
+    if (this.state.categoriesSet === true) {
+      return (<Link to={'/game'}>
+        Click here to start the game
+      </Link>)
+    }
+  }
+
+  componentDidMount() {
+    this.context.clearScore()
+  }
 
   render() {
     return (
+      <div>
+      <Nav/>
       <form className='categories' onSubmit={(e) => this.handleCategorySubmit(e)}>
           <fieldset>
             <legend>Pick Three Categories</legend>
@@ -84,8 +104,10 @@ class GameSetupPage extends Component {
               <option value="sports">Sports</option>
             </select>
           </fieldset>
-          <button type="submit">Start Game</button>
+          <button type="submit">Set Categories</button>
         </form>
+        {this.renderStartGame()}
+      </div>
     )
   }
 }

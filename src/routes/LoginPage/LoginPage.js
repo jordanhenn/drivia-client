@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
+import Nav from '../../components/Nav/Nav'
 import { withRouter } from 'react-router-dom'
 
 class LoginPage extends Component {
@@ -19,6 +20,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div className='LoginPage'>
+        <Nav/>
         <h2>Login</h2>
         <LoginForm
           onLoginSuccess={this.handleLoginSuccess}

@@ -14,7 +14,7 @@ const QuestionsContext = React.createContext({
   categoryThreeQuestions: [],
   categories: [],
   currentQuestion: {},
-  score: 0,
+  score: null,
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -23,7 +23,8 @@ const QuestionsContext = React.createContext({
   setCurrentQuestion: () => {},
   clearCurrentQuestion: () => {},
   deleteQuestion: () => {},
-  setScore: () => {}
+  setScore: () => {},
+  clearScore: () => {}
 })
 export default QuestionsContext
 
@@ -34,7 +35,7 @@ export class QuestionsProvider extends Component {
     categoryThreeQuestions: [],
     categories: [],
     currentQuestion: nullQuestion,
-    score: 0,
+    score: null,
     error: null,
   };
 
@@ -59,11 +60,15 @@ export class QuestionsProvider extends Component {
 }
 
   setScore = points => {
-      if(points === 0) {
-        this.setState({ score: 0 })
+      if(this.state.score === null){
+        this.setState({score: 0 + points})
       }
       const newScore = this.state.score + points
       this.setState({ score: newScore })
+  }
+
+  clearScore = () => {
+    this.setState({ score: null })
   }
 
   setError = error => {
@@ -106,6 +111,7 @@ export class QuestionsProvider extends Component {
       setCategoryTwoQuestions: this.setCategoryTwoQuestions,
       setCategoryThreeQuestions: this.setCategoryThreeQuestions,
       setScore: this.setScore,
+      clearScore: this.clearScore,
       setCurrentQuestion: this.setCurrentQuestion,
       deleteQuestion: this.deleteQuestion,
       clearCurrentQuestion: this.clearCurrentQuestion

@@ -9,7 +9,6 @@ import GamePage from '../../routes/GamePage/GamePage'
 import QuestionPage from '../../routes/QuestionPage/QuestionPage'
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import Leaderboard from '../../routes/Leaderboard/Leaderboard'
-import Nav from '../../components/Nav/Nav'
 import './App.css'
 
 class App extends Component {
@@ -25,7 +24,6 @@ class App extends Component {
       <div className='App'>
         <header className='App__header'>
           <h1>Drivia</h1>
-          <Nav/>
         </header>
         <main className='App__main'>
           {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}

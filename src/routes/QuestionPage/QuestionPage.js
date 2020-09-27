@@ -108,6 +108,8 @@ class QuestionPage extends Component {
             <SignatureCanvas
                 canvasProps={{className: 'sigCanvas'}}
                 clearOnResize={false}
+                minWidth={0.25}
+                maxWidth={1.25}
                 ref={(ref) => { this.sigPad = ref }} />
             </div>
             <div className="submit-answer-area">

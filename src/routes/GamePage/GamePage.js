@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter} from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import QuestionItem from '../../components/QuestionItem/QuestionItem'
 import QuestionsContext from '../../contexts/QuestionsContext'
 import DriviaApiService from '../../services/drivia-api-service'
@@ -10,25 +10,17 @@ import TokenService from '../../services/token-service'
 class GamePage extends Component { 
   static contextType = QuestionsContext
 
-  state = {
-      categories: [],
-      categoryOneQuestions: [],
-      categoryTwoQuestions: [],
-      categoryThreeQuestions: []
-  }
-
   newGame = () => {
-    this.context.setScore(0)
     this.props.history.push('/gamesetup') 
   }
 
   submitScore = () => {
     const { score } = this.context
-    DriviaApiService.postScore(score)
-    this.context.setScore(0)
-    this.props.history.push('/leaderboard') 
+    console.log(score)
+    //DriviaApiService.postScore(score)
+    //.then(result => console.log(result))
+    //this.props.history.push('/leaderboard')
   }
-
 
   componentDidMount() {
     this.context.clearError()
@@ -82,17 +74,20 @@ class GamePage extends Component {
       </div>)
       const noAuthVersion = (<div>
         <p className="final-score"><span className="final-score-title">FINAL SCORE: </span><span className="final-score-num">{score}</span></p>
+        <Link to={'/'}>Click here to go home</Link>
         <button onClick={this.newGame} className="new-game">New Game</button>
     </div>)
       if(categoryOneQuestions.length === 0 
         && categoryTwoQuestions.length === 0
         && categoryThreeQuestions.length === 0
-        && TokenService.hasAuthToken()) {
+        && TokenService.hasAuthToken()
+        && this.context.score !== null) {
             return authVersion
         } 
         else if (categoryOneQuestions.length === 0 
             && categoryTwoQuestions.length === 0
-            && categoryThreeQuestions.length === 0) {
+            && categoryThreeQuestions.length === 0
+            && this.context.score !== null) {
                 return noAuthVersion
             }
   }

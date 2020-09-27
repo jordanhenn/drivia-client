@@ -36,7 +36,7 @@ const DriviaApiService = {
           : res.json()
       )
   },
-  postScore( score ) {
+  postScore(score) {
     return fetch(`${config.API_ENDPOINT}/leaderboard`, {
       method: 'POST',
       headers: {
