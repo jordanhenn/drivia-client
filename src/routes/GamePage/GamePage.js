@@ -15,7 +15,7 @@ class GamePage extends Component {
   }
 
   submitScore = () => {
-    const { score } = this.context
+    const score = this.context.score.toString()
     DriviaApiService.postScore(score)
     .then(result => console.log(result))
     //this.props.history.push('/leaderboard')

@@ -43,7 +43,7 @@ const DriviaApiService = {
         'content-type': 'application/json',
         'Authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({
+      body: ({
         score
       }),
     })
