@@ -41,9 +41,9 @@ const DriviaApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'Authorization': `bearer ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      body: ({
+      body: JSON.stringify({
         score
       }),
     })
