@@ -18,7 +18,7 @@ export default class LoginForm extends Component {
       </Link>)
     } else {
       return (
-      <div>
+      <div className='login-links'>
       <Link to={'/login'}>
         Login
       </Link>
