@@ -1,8 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
 import './Nav.css'
 
-export default function Nav(props) {
+export default class LoginForm extends Component {
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken()
+  }
+
+  renderLoginLogoutLink() {
+    if(TokenService.hasAuthToken()) {
+      return (
+      <Link
+        onClick={this.handleLogoutClick}
+        to={'/'}>
+        Logout
+      </Link>)
+    } else {
+      return (
+      <div>
+      <Link to={'/login'}>
+        Login
+      </Link>
+      <Link to={'/register'}>
+        Register
+      </Link>
+      </div>
+      )
+    }
+  }
+  render() {
   return (
     <nav className='Nav'>
     <div className='Nav-Style'>
@@ -16,13 +43,9 @@ export default function Nav(props) {
       <Link to={'/leaderboard'}>
         Leaderboard
       </Link>
-      <Link to={'/login'}>
-        Login
-      </Link>
-      <Link to={'/register'}>
-        Register
-      </Link>
+      {this.renderLoginLogoutLink()}
     </div>
     </nav>
   );
+  }
 }
