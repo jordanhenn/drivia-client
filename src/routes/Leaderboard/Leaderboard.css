@@ -1,0 +1,15 @@
+table, th, td {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 3px;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: white;
+    color: #2F2FA2;
+}

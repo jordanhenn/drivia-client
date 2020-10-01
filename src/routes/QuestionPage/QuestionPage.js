@@ -15,6 +15,7 @@ class QuestionPage extends Component {
     answered: false,
     returnedAnswer: null,
     wasAnswerRight: '',
+    waitingForAnswer: false
   };
     
     static contextType = QuestionsContext
@@ -32,25 +33,27 @@ class QuestionPage extends Component {
 
     submitAnswer = () => {
       const imgUrl = this.sigPad.getTrimmedCanvas().toDataURL('image/png')
-      console.log(this.context.currentQuestion.answer)
-      console.log(imgUrl)
-      this.setState({ error: null })
+      this.setState({ 
+        error: null,
+        waitingForAnswer: true
+      })
       DriviaApiService.postImage(imgUrl)
         .then(res => {
           const trimmedResult = res.data.text.toLowerCase().replace(/\s+/g, '')
-          console.log(trimmedResult)
           if (trimmedResult === this.context.currentQuestion.answer) {
               this.setState({ 
                 answered: true,
                 wasAnswerRight: 'correct',
-                returnedAnswer: trimmedResult
+                returnedAnswer: trimmedResult,
+                waitingForAnswer: false
               })
               this.context.setScore(500)
           } else {
           this.setState({
             answered: true,
             wasAnswerRight: 'incorrect',
-            returnedAnswer: trimmedResult
+            returnedAnswer: trimmedResult,
+            waitingForAnswer: false
           })
           this.context.setScore(-500)
         }
@@ -86,9 +89,17 @@ class QuestionPage extends Component {
       </button>
       </div>)
 
-    if(this.state.answered === false ) {
+      const waiting = (<div>
+      <p>Detecting handwriting...</p>
+      </div>)
+
+    if(this.state.answered === false && this.state.waitingForAnswer === false) {
       return submitButtons
-    } else {
+    } 
+    else if (this.state.waitingForAnswer === true) {
+      return waiting
+    }
+    else {
       return goBackButton
     }
 }
@@ -97,9 +108,6 @@ class QuestionPage extends Component {
     const { currentQuestion } = this.context
     return (
       <div className='question-answer-area'>
-          <div className="points-style">
-              <p className="points">Points: 500</p>
-          </div>
           <div className="question-area">
               {currentQuestion.question}
           </div>
@@ -108,8 +116,8 @@ class QuestionPage extends Component {
             <SignatureCanvas
                 canvasProps={{className: 'sigCanvas'}}
                 clearOnResize={false}
-                minWidth={0.25}
-                maxWidth={1.25}
+                minWidth={0.5}
+                maxWidth={1.50}
                 ref={(ref) => { this.sigPad = ref }} />
             </div>
             <div className="submit-answer-area">

@@ -1,0 +1,20 @@
+.login {
+    margin-top: 10px;
+}
+
+.user_name {
+    display: flex;
+    padding: 10px;
+}
+
+.password {
+    display: flex;
+    padding: 10px;
+}
+
+input {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    color: black;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
+import './LoginForm.css'
 
 export default class LoginForm extends Component { 
   static defaultProps = {
@@ -56,7 +57,7 @@ export default class LoginForm extends Component {
             type='password'
             id='LoginForm__password'/>
         </div>
-        <button type='submit'>
+        <button className="login" type='submit'>
           Login
         </button>
       </form>

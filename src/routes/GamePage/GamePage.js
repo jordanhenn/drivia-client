@@ -5,6 +5,7 @@ import QuestionsContext from '../../contexts/QuestionsContext'
 import DriviaApiService from '../../services/drivia-api-service'
 import Score from '../../components/Score/Score'
 import TokenService from '../../services/token-service'
+import './GamePage.css'
 
 
 class GamePage extends Component { 
@@ -93,6 +94,7 @@ class GamePage extends Component {
 
   render() {
     const { categories } = this.context
+    if (categories.length !== 0) {
     return (
       <div>
           <div className="score-location">
@@ -101,19 +103,19 @@ class GamePage extends Component {
           {this.renderFinalScore()}
           <div className='categories'>
               <div className='category-one'>
-                <h3 className='category-header'>{categories[0]}</h3>
+                <h3 className='category-header'>{categories[0].toUpperCase()}</h3>
                 <div className='question-column-item'>
                 {this.renderCategoryOne()}
                 </div>
               </div>
               <div className='category-two'>
-              <h3 className='category-header'>{categories[1]}</h3>
+              <h3 className='category-header'>{categories[1].toUpperCase()}</h3>
               <div className='question-column-item'>
                 {this.renderCategoryTwo()}
                 </div>
               </div>
               <div className='category-three'>
-              <h3 className='category-header'>{categories[2]}</h3>
+              <h3 className='category-header'>{categories[2].toUpperCase()}</h3>
               <div className='question-column-item'>
                 {this.renderCategoryThree()}
                 </div>
@@ -121,6 +123,14 @@ class GamePage extends Component {
           </div>
       </div>
     )
+    } else {
+      return (
+        <div>
+          <p>There's been an error.</p>
+          <Link to={'/'}>Click here to go back to the homepage.</Link>
+          </div>
+      )
+    }
   }
 }
 

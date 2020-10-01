@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import './Nav.css'
 
-export default class LoginForm extends Component {
+export default class Nav extends Component {
+  
   handleLogoutClick = () => {
     TokenService.clearAuthToken()
   }

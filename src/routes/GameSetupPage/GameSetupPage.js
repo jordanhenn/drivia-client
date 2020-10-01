@@ -3,6 +3,7 @@ import QuestionsContext from '../../contexts/QuestionsContext'
 import Nav from '../../components/Nav/Nav'
 import { withRouter, Link } from 'react-router-dom';
 import DriviaApiService from '../../services/drivia-api-service'
+import './GameSetupPage.css'
 
 class GameSetupPage extends Component { 
   static contextType = QuestionsContext
@@ -11,7 +12,8 @@ class GameSetupPage extends Component {
     categoryOne: "movies",
     categoryTwo: "movies",
     categoryThree: "movies",
-    categoriesSet: "false"
+    categoriesSet: "false",
+    error: null
   }
 
   handleCategorySubmit = (e) => {
@@ -21,6 +23,12 @@ class GameSetupPage extends Component {
       this.state.categoryTwo,
       this.state.categoryThree
     ]
+
+    if(this.state.categoryOne === this.state.categoryTwo ||
+      this.state.categoryOne === this.state.categoryThree ||
+      this.state.categoryTwo === this.state.categoryThree) {
+        this.setState({error: 'You must pick three different categories.'})
+      } else {
     this.context.setCategories(categories)
 
     DriviaApiService.getQuestions(categories[0])
@@ -38,8 +46,10 @@ class GameSetupPage extends Component {
     this.context.clearScore()
     
     this.setState({
-      categoriesSet: true
+      categoriesSet: true,
+      error: null
     })
+  }
   }
 
   handleCategoryOneChange = (e) => {
@@ -67,15 +77,20 @@ class GameSetupPage extends Component {
   }
 
   render() {
+    const { error } = this.state
     return (
       <div>
       <Nav/>
+      <div role='alert'>
+          {error && <p className='red'>{error}</p>}
+        </div>
       <form className='categories' onSubmit={(e) => this.handleCategorySubmit(e)}>
           <fieldset>
             <legend>Pick Three Categories</legend>
+            <div className="category-styling">
             <label htmlFor="categorytwo">First Category:</label>
-            <select name="categoryone" id="categoryone" onChange={(e) => this.handleCategoryOneChange(e)} required>
-              <option selected="selected" value="movies">Movies</option>
+            <select defaultValue="movies" name="categoryone" id="categoryone" onChange={(e) => this.handleCategoryOneChange(e)} required>
+              <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
               <option value="state-capitals">State Capitals</option>
@@ -83,9 +98,11 @@ class GameSetupPage extends Component {
               <option value="art">Art</option>
               <option value="sports">Sports</option>
             </select>
+            </div>
+            <div className="category-styling">
             <label htmlFor="categorytwo">Second Category:</label>
-            <select name="categorytwo" id="categorytwo" onChange={(e) => this.handleCategoryTwoChange(e)} required>
-              <option selected="selected" value="movies">Movies</option>
+            <select defaultValue="movies" name="categorytwo" id="categorytwo" onChange={(e) => this.handleCategoryTwoChange(e)} required>
+              <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
               <option value="state-capitals">State Capitals</option>
@@ -93,9 +110,11 @@ class GameSetupPage extends Component {
               <option value="art">Art</option>
               <option value="sports">Sports</option>
             </select>
+            </div>
+            <div className="category-styling">
             <label htmlFor="categorythree">Third Category:</label>
-            <select name="categorythree" id="categorythree" onChange={(e) => this.handleCategoryThreeChange(e)} required>
-              <option selected="selected" value="movies">Movies</option>
+            <select defaultValue="movies" name="categorythree" id="categorythree" onChange={(e) => this.handleCategoryThreeChange(e)} required>
+              <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
               <option value="state-capitals">State Capitals</option>
@@ -103,6 +122,7 @@ class GameSetupPage extends Component {
               <option value="art">Art</option>
               <option value="sports">Sports</option>
             </select>
+            </div>
           </fieldset>
           <button type="submit">Set Categories</button>
         </form>

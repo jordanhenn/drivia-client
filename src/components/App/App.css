@@ -1,5 +1,14 @@
 * {
     box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #2F2FA2;
+    color: white;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(./Roboto/Roboto-Regular.ttf)
 }
 
 .App {
