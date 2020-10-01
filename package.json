@@ -9,6 +9,7 @@
     "jest-canvas-mock": "^2.3.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
+    "react-burger-menu": "^2.7.1",
     "react-dom": "^16.13.1",
     "react-hamburger-menu": "^1.2.1",
     "react-router-dom": "^5.2.0",

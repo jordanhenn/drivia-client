@@ -3,6 +3,9 @@ table, th, td {
     border-radius: 5px;
     padding: 3px;
     text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
 }
 
 th, td {

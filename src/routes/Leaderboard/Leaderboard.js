@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DriviaApiService from '../../services/drivia-api-service'
-import Nav from '../../components/Nav/Nav'
 import './Leaderboard.css'
 
 
@@ -28,7 +27,6 @@ export default class Leaderboard extends Component {
     })
     return (
       <div>
-          <Nav/>
           <h3>Top 10 Scorers</h3>
           <table>
             <tr>

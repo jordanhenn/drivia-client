@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import QuestionsContext from '../../contexts/QuestionsContext'
-import Nav from '../../components/Nav/Nav'
 import { withRouter, Link } from 'react-router-dom';
 import DriviaApiService from '../../services/drivia-api-service'
 import './GameSetupPage.css'
@@ -80,7 +79,6 @@ class GameSetupPage extends Component {
     const { error } = this.state
     return (
       <div>
-      <Nav/>
       <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>

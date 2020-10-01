@@ -24,6 +24,10 @@ button {
     border: 1px solid white;
     border-radius: 5px;
     padding: 10px;
+    width: 100px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover {

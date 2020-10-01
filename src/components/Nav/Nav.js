@@ -9,24 +9,62 @@ export default class Nav extends Component {
     TokenService.clearAuthToken()
   }
 
-  renderLoginLogoutLink() {
+  renderLinks() {
     if(TokenService.hasAuthToken()) {
-      return (
+      return (<ul className='Main-Nav'>
+      <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/'}>
+        About
+      </Link>
+      </li>
+      <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/gamesetup'}>
+        Quick Game
+      </Link>
+      </li>
+      <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/leaderboard'}>
+        Leaderboard
+      </Link>
+      </li>
+      <li className='nav-link'>
       <Link
         onClick={this.handleLogoutClick}
+        style={{ textDecoration: 'none' }}
         to={'/'}>
         Logout
-      </Link>)
+      </Link>
+      </li>
+      </ul>)
     } else {
       return (
-      <div className='login-links'>
-      <Link to={'/login'}>
+        <ul className='Main-Nav'>
+        <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/'}>
+        About
+      </Link>
+      </li>
+      <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/gamesetup'}>
+        Quick Game
+      </Link>
+      </li>
+      <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/leaderboard'}>
+        Leaderboard
+      </Link>
+      </li>
+        <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/login'}>
         Login
       </Link>
-      <Link to={'/register'}>
+        </li>
+        <li className='nav-link'>
+      <Link style={{ textDecoration: 'none' }} to={'/register'}>
         Register
       </Link>
-      </div>
+        </li>
+      </ul>
       )
     }
   }
@@ -34,17 +72,7 @@ export default class Nav extends Component {
   return (
     <nav className='Nav'>
     <div className='Nav-Style'>
-      <Link to={'/'}>
-        About
-      </Link>
-      {' '}
-      <Link to={'/gamesetup'}>
-        Quick Game
-      </Link>
-      <Link to={'/leaderboard'}>
-        Leaderboard
-      </Link>
-      {this.renderLoginLogoutLink()}
+    {this.renderLinks()}
     </div>
     </nav>
   );

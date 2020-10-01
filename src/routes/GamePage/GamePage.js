@@ -125,7 +125,7 @@ class GamePage extends Component {
     )
     } else {
       return (
-        <div>
+        <div className='reload-error'>
           <p>There's been an error.</p>
           <Link to={'/'}>Click here to go back to the homepage.</Link>
           </div>

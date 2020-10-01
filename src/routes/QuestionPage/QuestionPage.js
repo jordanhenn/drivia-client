@@ -73,7 +73,7 @@ class QuestionPage extends Component {
   }
 
   renderButtons() {
-    const submitButtons = (<div>
+    const submitButtons = (<div className='submit-buttons'>
       <button onClick={this.submitAnswer} className="submit-answer-button">
                   Submit Answer
               </button>
@@ -82,14 +82,14 @@ class QuestionPage extends Component {
               </button>
       </div>)
 
-    const goBackButton = (<div>
+    const goBackButton = (<div className="submit-buttons">
       <p>You answered '{this.state.returnedAnswer}'. That was {this.state.wasAnswerRight}, bud.</p>
       <button onClick={this.goBack} className="clear-answer-button">
       Back to Questions
       </button>
       </div>)
 
-      const waiting = (<div>
+      const waiting = (<div className="submit-buttons">
       <p>Detecting handwriting...</p>
       </div>)
 

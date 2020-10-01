@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import LandingPage from '../../routes/LandingPage/LandingPage'
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
 import LoginPage from '../../routes/LoginPage/LoginPage'
@@ -9,6 +9,8 @@ import GamePage from '../../routes/GamePage/GamePage'
 import QuestionPage from '../../routes/QuestionPage/QuestionPage'
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import Leaderboard from '../../routes/Leaderboard/Leaderboard'
+import Nav from '../../components/Nav/Nav'
+import Sidebar from '../../components/Sidebar/Sidebar'
 import './App.css'
 
 class App extends Component {
@@ -23,9 +25,18 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App__header'>
-          <h1>Drivia</h1>
+          <div className='header-styling'>
+          <h1><Link style={{ textDecoration: 'none' }} to={'/'}>Drivia</Link></h1>
+          <div className="desktop-nav">
+          <Nav/>
+          </div>
+          <div className="mobile-nav">
+          <Sidebar/>
+          </div>
+          </div>
         </header>
         <main className='App__main'>
+          <div id="page-wrap">
           {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}
           <Switch>
             <Route
@@ -61,6 +72,7 @@ class App extends Component {
               component={NotFoundPage}
             />
           </Switch>
+        </div>
         </main>
       </div>
     )

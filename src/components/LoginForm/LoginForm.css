@@ -1,15 +1,15 @@
-.login {
-    margin-top: 10px;
-}
-
 .user_name {
     display: flex;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .password {
     display: flex;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input {
