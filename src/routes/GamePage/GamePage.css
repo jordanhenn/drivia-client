@@ -23,3 +23,17 @@
 .category-header {
     margin-bottom: 5px;
 }
+
+.final-score-style {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.new-game {
+    margin-top: 10px;
+    margin-bottom: 5px; 
+}

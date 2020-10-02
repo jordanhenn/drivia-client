@@ -67,12 +67,12 @@ class GamePage extends Component {
 
   renderFinalScore() {
       const { categoryOneQuestions, categoryTwoQuestions, categoryThreeQuestions, score } = this.context
-      const authVersion = (<div>
+      const authVersion = (<div className='final-score-style'>
           <p className="final-score"><span className="final-score-title">FINAL SCORE: </span><span className="final-score-num">{score}</span></p>
           <button onClick={this.newGame} className="new-game">New Game</button>
           <button onClick={this.submitScore} className="submit-score">Submit Score</button>
       </div>)
-      const noAuthVersion = (<div>
+      const noAuthVersion = (<div className='final-score-style'>
         <p className="final-score"><span className="final-score-title">FINAL SCORE: </span><span className="final-score-num">{score}</span></p>
         <Link to={'/'}>Click here to go home</Link>
         <button onClick={this.newGame} className="new-game">New Game</button>
