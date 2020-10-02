@@ -10,26 +10,62 @@ export default class Sidebar extends Component {
         TokenService.clearAuthToken()
       }
     
-      renderLoginLogoutLink() {
+      renderLinks() {
         if(TokenService.hasAuthToken()) {
-          return (
+          return (<ul className='Main-Nav-Mobile'>
+          <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/'}>
+            About
+          </Link>
+          </li>
+          <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/gamesetup'}>
+            Quick Game
+          </Link>
+          </li>
+          <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/leaderboard'}>
+            Leaderboard
+          </Link>
+          </li>
+          <li className='nav-link-mobile'>
           <Link
             onClick={this.handleLogoutClick}
             style={{ textDecoration: 'none' }}
             to={'/'}>
             Logout
-          </Link>)
+          </Link>
+          </li>
+          </ul>)
         } else {
           return (
-          <div className='login-links'>
+            <ul className='Main-Nav-Mobile'>
+            <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/'}>
+            About
+          </Link>
+          </li>
+          <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/gamesetup'}>
+            Quick Game
+          </Link>
+          </li>
+          <li className='nav-link-mobile'>
+          <Link style={{ textDecoration: 'none' }} to={'/leaderboard'}>
+            Leaderboard
+          </Link>
+          </li>
+            <li className='nav-link-mobile'>
           <Link style={{ textDecoration: 'none' }} to={'/login'}>
             Login
           </Link>
-          <br/>
+            </li>
+            <li className='nav-link-mobile'>
           <Link style={{ textDecoration: 'none' }} to={'/register'}>
             Register
           </Link>
-          </div>
+            </li>
+          </ul>
           )
         }
       }
@@ -37,16 +73,9 @@ export default class Sidebar extends Component {
     render() {
         return (
             <Menu>
-                <Link style={{ textDecoration: 'none' }} to={'/'}>
-                    About
-                </Link>
-                <Link style={{ textDecoration: 'none' }} to={'/gamesetup'}>
-                    Quick Game
-                </Link>
-                <Link style={{ textDecoration: 'none' }} to={'/leaderboard'}>
-                    Leaderboard
-                </Link>
-                    {this.renderLoginLogoutLink()}
+                <div className='Nav-Style-Mobile'>
+                {this.renderLinks()}
+                </div>
             </Menu>
         )
     }

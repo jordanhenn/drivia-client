@@ -61,10 +61,11 @@ export class QuestionsProvider extends Component {
 
   setScore = points => {
       if(this.state.score === null){
-        this.setState({score: 0 + points})
-      }
+        this.setState({score: points})
+      } else {
       const newScore = this.state.score + points
       this.setState({ score: newScore })
+      }
   }
 
   clearScore = () => {

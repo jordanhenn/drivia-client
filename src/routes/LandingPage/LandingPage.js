@@ -10,7 +10,7 @@ export default class LandingPage extends Component {
               It utilizes the <a href="https://github.com/tesseract-ocr/">Tesseract OCR</a> to detect your handwriting and convert it to digital text.
             </p> 
             <p>    
-              <span className="bold">WARNING:</span> Drivia is <span className="bold">hard.</span> You must write as legibly as possible if you even hope to score a point. Character spacing, line spacing, and capitlization don't matter.
+              <span className="bold">WARNING:</span> Drivia is <span className="bold">hard.</span> You must write as legibly as possible if you even hope to score a point. Character spacing, line spacing, and capitalization don't matter.
             </p>
         </div>
       )
