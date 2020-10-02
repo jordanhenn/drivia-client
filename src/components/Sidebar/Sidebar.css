@@ -11,7 +11,7 @@
     text-decoration: underline;
 }
 
-ul.mobile {
+ul.Main-Nav-Mobile {
     list-style-type: none;
     display: flex;
     flex-direction: column;
