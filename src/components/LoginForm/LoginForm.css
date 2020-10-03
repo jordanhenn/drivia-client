@@ -18,3 +18,18 @@ input {
     border-radius: 5px;
     color: black;
 }
+
+@font-face {
+    font-family: Roboto-Bold;
+    src: url(../../components/App/Roboto/Roboto-Bold.ttf)
+}
+
+.bold {
+    font-family: Roboto-Bold;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

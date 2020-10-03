@@ -73,9 +73,7 @@ export default class LoginForm extends Component {
           Login
         </button>
       </form>
-      <button className="login" onClick={this.submitDemo()}>
-          Demo
-        </button>
+      <p><span className="bold">Demo Account:</span> demo-user <span className="bold">Password:</span> Password!1</p>
       </div>
     )
   }
