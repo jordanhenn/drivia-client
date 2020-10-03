@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
 import TokenService from "../../services/token-service";
 import './Sidebar.css'
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
 
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
+        .then(this.history.push('/'))
       }
     
       renderLinks() {
@@ -80,3 +81,5 @@ export default class Sidebar extends Component {
         )
     }
 }
+
+export default withRouter(Sidebar)

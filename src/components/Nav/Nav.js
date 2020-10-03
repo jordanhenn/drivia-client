@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import './Nav.css'
 
-export default class Nav extends Component {
+class Nav extends Component {
   
   handleLogoutClick = () => {
     TokenService.clearAuthToken()
+    .then(this.history.push('/'))
   }
 
   renderLinks() {
@@ -78,3 +79,5 @@ export default class Nav extends Component {
   );
   }
 }
+
+export default withRouter(Nav)
