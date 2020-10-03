@@ -10,6 +10,17 @@ export default class LoginForm extends Component {
 
   state = { error: null }
 
+  submitDemo = () => {
+    AuthApiService.postLogin({
+      user_name: 'demo-user',
+      password: 'Password!1'
+    })
+    .then(res => {
+      TokenService.saveAuthToken(res.authToken)
+      this.props.onLoginSuccess()
+    })
+  }
+
   handleSubmitJwtAuth = ev => {
     ev.preventDefault()
     this.setState({ error: null })
@@ -33,6 +44,7 @@ export default class LoginForm extends Component {
   render() {
     const { error } = this.state
     return (
+      <div>
       <form
         className='LoginForm'
         onSubmit={this.handleSubmitJwtAuth}
@@ -61,6 +73,10 @@ export default class LoginForm extends Component {
           Login
         </button>
       </form>
+      <button className="login" onClick={this.submitDemo()}>
+          Demo
+        </button>
+      </div>
     )
   }
 }

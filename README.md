@@ -1,6 +1,9 @@
 # Drivia
 https://drivia.vercel.app
 
+## API Repo
+https://github.com/jordanhenn/drivia-api
+
 ![Game Page](./app-photos/gamepage.png "Game Page with Categories")
 
 ![Question Page](./app-photos/questionpage1.png "Question Page with Drawing Pad")
