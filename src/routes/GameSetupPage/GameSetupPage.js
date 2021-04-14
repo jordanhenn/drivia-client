@@ -9,9 +9,9 @@ class GameSetupPage extends Component {
 
   state = {
     categoryOne: "movies",
-    categoryTwo: "movies",
-    categoryThree: "movies",
-    categoriesSet: "false",
+    categoryTwo: "sailing",
+    categoryThree: "state-capitals",
+    categoriesSet: false,
     error: null
   }
 
@@ -62,14 +62,6 @@ class GameSetupPage extends Component {
   handleCategoryThreeChange = (e) => {
     this.setState({ categoryThree: e.target.value });
   }
-  
-  renderStartGame() {
-    if (this.state.categoriesSet === true) {
-      return (<Link to={'/game'}>
-        Click here to start the game
-      </Link>)
-    }
-  }
 
   componentDidMount() {
     this.context.clearScore()
@@ -77,17 +69,19 @@ class GameSetupPage extends Component {
 
   render() {
     const { error } = this.state
+    console.log(this.state.categoriesSet)
     return (
       <div>
       <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>
+      {!(this.state.categoriesSet) ?
       <form className='categories' onSubmit={(e) => this.handleCategorySubmit(e)}>
           <fieldset>
             <legend>Pick Three Categories</legend>
             <div className="category-styling">
             <label htmlFor="categorytwo">First Category:</label>
-            <select defaultValue="movies" name="categoryone" id="categoryone" onChange={(e) => this.handleCategoryOneChange(e)} required>
+            <select defaultValue={this.state.categoryOne} name="categoryone" id="categoryone" onChange={(e) => this.handleCategoryOneChange(e)} required>
               <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
@@ -99,7 +93,7 @@ class GameSetupPage extends Component {
             </div>
             <div className="category-styling">
             <label htmlFor="categorytwo">Second Category:</label>
-            <select defaultValue="movies" name="categorytwo" id="categorytwo" onChange={(e) => this.handleCategoryTwoChange(e)} required>
+            <select defaultValue={this.state.categoryTwo} name="categorytwo" id="categorytwo" onChange={(e) => this.handleCategoryTwoChange(e)} required>
               <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
@@ -111,7 +105,7 @@ class GameSetupPage extends Component {
             </div>
             <div className="category-styling">
             <label htmlFor="categorythree">Third Category:</label>
-            <select defaultValue="movies" name="categorythree" id="categorythree" onChange={(e) => this.handleCategoryThreeChange(e)} required>
+            <select defaultValue={this.state.categoryThree} name="categorythree" id="categorythree" onChange={(e) => this.handleCategoryThreeChange(e)} required>
               <option value="movies">Movies</option>
               <option value="history">History</option>
               <option value="science">Science</option>
@@ -123,8 +117,13 @@ class GameSetupPage extends Component {
             </div>
           </fieldset>
           <button type="submit">Set Categories</button>
-        </form>
-        {this.renderStartGame()}
+        </form> :
+        <div>
+          <p className='categories-set'>The categories have been set. Click the button below to start the game.</p>
+          <Link style={{textDecoration: 'none', padding: '10px', border: '1px solid white', borderRadius: '5px'}} to={'/game'}>
+        Start
+      </Link>
+        </div>}
       </div>
     )
   }

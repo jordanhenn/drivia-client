@@ -34,3 +34,7 @@ button:hover {
     background-color: white;
     color: #2F2FA2;
 }
+
+.categories-set {
+    margin-bottom: 10px;
+}
